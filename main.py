@@ -1,5 +1,5 @@
-#FINALIZEI A AULA 1
-from backend.game import Game
+#AULA PRATICA 2 33:05
+from backend.Game import Game
 #inicializa
 
 #inicializa o jogo
