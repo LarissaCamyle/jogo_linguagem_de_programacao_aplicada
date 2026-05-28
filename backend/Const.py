@@ -1,5 +1,6 @@
 #CORES  ========================================
 white = (255,255,255)
+purple = (179, 180, 255)
 
 
 
@@ -9,7 +10,7 @@ window_height = 450
 
 
 
-texto_menu= ('NEW GAME 1P',
+lista_opcoes_menu= ('NEW GAME 1P',
             'NEW GAME 2P - COOPERATIVE',
             'NEW GAME 2P - COMPETITIVE',
             'SCORE',
