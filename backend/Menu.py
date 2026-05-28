@@ -1,5 +1,5 @@
 from tkinter.font import Font
-from backend.Const import window_height, window_width, black
+from backend.Const import window_height, window_width, white, texto_menu
 
 import pygame
 
@@ -24,9 +24,11 @@ class Menu:
             self.window.blit(source= self.imagem, dest= self.background)
 
             #texto print na tela
-            self.menu_text(50, "Jogo Teste",black, ((window_width / 2), 70))
+            self.menu_text(50, "Jogo Teste",white, ((window_width / 2), 50))
 
-
+            #printa os textos do menu
+            for i in range (len(texto_menu)):
+                self.menu_text(20, texto_menu[i], white, ((window_width / 2), 270 + 30 * i))
 
             #atualiza a tela para printar a imagem
             pygame.display.flip()
