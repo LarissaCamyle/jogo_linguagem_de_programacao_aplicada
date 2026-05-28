@@ -1,6 +1,6 @@
 import pygame
 from backend.Menu import Menu
-from backend.Const import window_width, window_height
+from backend.Const import window_width, window_height, lista_opcoes_menu
 
 class Game:
     def __init__(self):
@@ -13,9 +13,19 @@ class Game:
 
             #Inicializa o menu
             menu = Menu(self.window)
-            menu.run()
-            pass
+            menu_return = menu.run()
 
+            #opcao iniciar jogo
+            if menu_return == lista_opcoes_menu[0]:
+                pass
+            #opcao sair do jogo
+            if menu_return == lista_opcoes_menu[4]:
+                pygame.quit()
+                quit()
+
+
+
+            
 
 
 
