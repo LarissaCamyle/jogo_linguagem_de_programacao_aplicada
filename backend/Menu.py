@@ -7,7 +7,7 @@ class Menu:
     def __init__(self, window):
         self.window = window
         #carrega imagem de fundo
-        self.imagem = pygame.image.load('./backend/imagens/Menu_background.png')
+        self.imagem = pygame.image.load('./backend/arquivos_base/MenuBg.png')
         #desenha o retangulo para colocar o background
         self.background= self.imagem.get_rect(left=0, top=0)
 
@@ -37,10 +37,10 @@ class Menu:
             for i in range (len(lista_opcoes_menu)):
                 #se a linha/opcão estiver selecionado o texto fica lilas
                 if i == contador_opcoes_menu:
-                    self.menu_text(20, lista_opcoes_menu[i], purple, ((window_width / 2), 290 + 30 * i))
+                    self.menu_text(20, lista_opcoes_menu[i], purple, ((window_width / 2), 100 + 30 * i))
                 #se a linha/opcão não estiver selecionado o texto fica branco
                 else:
-                    self.menu_text(20, lista_opcoes_menu[i], white, ((window_width / 2), 290 + 30 * i))
+                    self.menu_text(20, lista_opcoes_menu[i], white, ((window_width / 2), 100 + 30 * i))
 
 
             #atualiza a tela para printar a imagem selecionada como imagem de fundo

@@ -1,12 +1,12 @@
 #CORES  ========================================
 white = (255,255,255)
-purple = (179, 180, 255)
+purple = (0,0,0)
 
 
 
 #tamanho da tela ===============================
-window_width = 800
-window_height = 450
+window_width = 576
+window_height = 324
 
 
 
