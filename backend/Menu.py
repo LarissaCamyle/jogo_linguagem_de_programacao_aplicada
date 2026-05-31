@@ -7,7 +7,7 @@ class Menu:
     def __init__(self, window):
         self.window = window
         #carrega imagem de fundo
-        self.imagem = pygame.image.load('./backend/arquivos_base/MenuBg.png')
+        self.imagem = pygame.image.load('./backend/img/Menu_background.png')
         #desenha o retangulo para colocar o background
         self.background= self.imagem.get_rect(left=0, top=0)
 
