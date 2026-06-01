@@ -11,6 +11,7 @@ class Entity(ABC):
         caminho_imagem = os.path.join('backend', 'img', f'{name}.png')
         
         self.surf = pygame.image.load(caminho_imagem)
+        #imagem
         self.rect = self.surf.get_rect(left= position[0], top= position[1])
         self.speed = 0
 

@@ -17,13 +17,14 @@ lista_opcoes_menu= ('NEW GAME 1P',
             'EXIT')
 
 
-velocidade_background_level1 = {
+velocidade_entidades = {
     'background1img0': 2,
     #imagem nao se move
     'background1img1': 0,
     'background1img2': 3,
     'background1img3': 4,
     'background1img4': 5,
+    'Player1': 3,
 }
 
 

@@ -1,5 +1,5 @@
 import sys
-
+from backend.Const import white, window_height
 from backend.entity import Entity
 from backend.entityFactory import EntityFactory
 import pygame
@@ -9,10 +9,14 @@ class Level:
         self.window = window
         self.name = name
         self.game_mode = game_mode
+        #lista das entidades do level 1
         self.entity_list : list[Entity] = []
-        #pega todos os arquivos do background 1
+        #pega todos os arquivos do background 1 e adiciona na lista de entidades
         self.entity_list.extend(EntityFactory.get_entity('Level1Bg'))
-        self.timeout = 20000 
+        #adiciona o player 1 na lista de entidades
+        self.entity_list.append(EntityFactory.get_entity('Player1'))
+        self.timeout = 20000 #20 segundos
+        
 
     def run(self):
         #carregar musica
@@ -33,7 +37,7 @@ class Level:
                 self.window.blit(source= background.surf, dest=background.rect)
                 #movimento da imagem
                 background.move()
-            pygame.display.flip()
+
 
             #fecha janela
             for event in pygame.event.get():
@@ -42,15 +46,22 @@ class Level:
                     sys.exit()
 
 
-            #printa texto
-            self.level_text()
+            #printa o tempo de duração da fase
+            self.level_text(16, f'{self.name} = Timeout: {self.timeout / 1000 : .1f}s', white, (10,5))
+            #printa o FPS
+            self.level_text(16, f'FPS: {clock.get_fps() :.0f}', white,(10, window_height - 35))
+            #quantos personagens tem na tela
+            self.level_text(16, f'Entidades: {len(self.entity_list)}', white, (10, window_height - 20))
+
+            #printa tudo na tela
+            pygame.display.flip()
         pass
 
     #cada texto é como uma imagem no pygame
-    def level_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
+    def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         text_font: pygame.Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
-        text_rect: pygame.Rect = text_surf.get_rect(center=text_center_pos)
+        text_rect: pygame.Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)
 
 
