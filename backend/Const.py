@@ -5,8 +5,8 @@ purple = (0,0,0)
 
 
 #tamanho da tela ===============================
-window_width = 576
-window_height = 324
+window_width = 800
+window_height = 450
 
 
 
@@ -18,12 +18,12 @@ lista_opcoes_menu= ('NEW GAME 1P',
 
 
 velocidade_background_level1 = {
-    'background1img0': 1,
+    'background1img0': 2,
     #imagem nao se move
     'background1img1': 0,
-    'background1img2': 2,
-    'background1img3': 3,
-    'background1img4': 4,
+    'background1img2': 3,
+    'background1img3': 4,
+    'background1img4': 5,
 }
 
 
