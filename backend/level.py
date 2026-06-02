@@ -1,5 +1,5 @@
 import sys
-from backend.Const import white, window_height
+from backend.Const import white, window_height, lista_opcoes_menu
 from backend.entity import Entity
 from backend.entityFactory import EntityFactory
 import pygame
@@ -16,6 +16,10 @@ class Level:
         #adiciona o player 1 na lista de entidades
         self.entity_list.append(EntityFactory.get_entity('Player1'))
         self.timeout = 20000 #20 segundos
+
+        #se no menu for escolhido a opção cooperativo ou competitivo adiciona o player 2 como entidade
+        if game_mode in [lista_opcoes_menu[1], lista_opcoes_menu[2]]:
+            self.entity_list.append(EntityFactory.get_entity('Player2'))
         
 
     def run(self):

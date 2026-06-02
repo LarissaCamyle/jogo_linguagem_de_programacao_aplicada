@@ -1,5 +1,8 @@
+import random
+
 from backend.background import Background
 from backend.Const import window_height, window_width
+from backend.enemy import Enemy
 from backend.player import Player
 #classe fabrica
 class EntityFactory:
@@ -21,9 +24,31 @@ class EntityFactory:
                     lista_bg.append(Background(f'background1img{i}', (window_width,0)))
 
                 return lista_bg
+            
             #entidade player 1 level 1
             case 'Player1':
                 return Player('Player1', (20, window_height / 2 - 60))
+            
+            #entidade player 2 level 1
+            case 'Player2':
+                return Player('Player2', (20, window_height / 2 + 20))
+
+            #entidade enemy level 1
+            case 'Enemy1':
+                #                       vem fora da tela   
+                #                                           nasce aleatoriamente no eixo y
+                return Enemy('Enemy1', (window_width + 10, random.randint(0, window_height)))
+            
+            #entidade enemy level 1
+            case 'Enemy1':
+                #                       vem fora da tela   
+                #                                           nasce aleatoriamente no eixo y
+                return Enemy('Enemy1', (window_width + 10, random.randint(0, window_height)))
+
+
+
+
+
 
 
 

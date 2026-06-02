@@ -24,7 +24,10 @@ velocidade_entidades = {
     'background1img2': 3,
     'background1img3': 4,
     'background1img4': 5,
-    'Player1': 3,
+    'Player1': 5,
+    'Player2': 5,
+    'Enemy1': 4,
+    'Enemy2': 3,
 }
 
 
