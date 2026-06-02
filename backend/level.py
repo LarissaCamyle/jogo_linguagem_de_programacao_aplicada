@@ -20,6 +20,9 @@ class Level:
         #se no menu for escolhido a opção cooperativo ou competitivo adiciona o player 2 como entidade
         if game_mode in [lista_opcoes_menu[1], lista_opcoes_menu[2]]:
             self.entity_list.append(EntityFactory.get_entity('Player2'))
+
+        #a cada x tempo aparece um inimig
+        pygame.time.set_timer()
         
 
     def run(self):
