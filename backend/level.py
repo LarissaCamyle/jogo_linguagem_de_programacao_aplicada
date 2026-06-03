@@ -76,8 +76,11 @@ class Level:
             #printa tudo na tela
             pygame.display.flip()
 
+            #CHAMA FUNCOES DE VERIFICACAO *****************************************************************
             #chama o evento para verificar as colisoes com a lista das entidades
             EntityMediator.verify_collision(entity_list=self.entity_list)
+            #chama o evento para verificar a vida das entidades
+            EntityMediator.verify_health(entity_list=self.entity_list)
         pass
 
     #cada texto é como uma imagem no pygame

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from backend.Const import vida_entidades
 import os
 import pygame
 
@@ -14,6 +15,8 @@ class Entity(ABC):
         #imagem
         self.rect = self.surf.get_rect(left= position[0], top= position[1])
         self.speed = 0
+        #vida da entidade
+        self.health = vida_entidades[self.name]
 
     #não utilizará o metodo move entao coloca o 
     @abstractmethod

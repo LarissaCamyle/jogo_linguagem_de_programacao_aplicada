@@ -1,3 +1,4 @@
+from backend.enemy import Enemy
 from backend.entity import Entity
 
 
@@ -6,7 +7,13 @@ class EntityMediator:
     @staticmethod
     #verifica se a entidade saiu da tela
     # os dois __ indica que o metodo só pode ser usado internamente e nao pode invocar fora da classe
-    def __verify_collision_window():
+    def __verify_collision_window(ent: Entity):
+        #verifica a entidade para saber se ela é de inimigo e 
+        #para saber se ela vai ultrapassar a tela para remover ela
+        if isinstance(ent, Enemy):
+            # se ultrapassar a tela e sumir deixa a vida em 0 da entidade
+            if ent.rect.right < 0 :
+                ent.health = 0
         pass
 
 
@@ -20,6 +27,18 @@ class EntityMediator:
             entity = entity_list[i]
             EntityMediator.__verify_collision_window(entity)
             
+
+
+    @staticmethod
+    #remove a entidade
+    def verify_health(entity_list: list[Entity]):
+        #verifica todas as entidades
+        for ent in entity_list:
+            #se a vida for igual ou menor que 0 remove a entidade da lista
+            if ent.health <= 0:
+                entity_list.remove(ent)
+
+
 
 
 
