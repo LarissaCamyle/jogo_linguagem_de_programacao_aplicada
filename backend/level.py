@@ -3,6 +3,7 @@ import sys
 from backend.Const import white, window_height, lista_opcoes_menu, evento_inimigo, tempo_spawn
 from backend.entity import Entity
 from backend.entityFactory import EntityFactory
+from backend.entityMediator import EntityMediator
 import pygame
 
 class Level:
@@ -74,6 +75,9 @@ class Level:
 
             #printa tudo na tela
             pygame.display.flip()
+
+            #chama o evento para verificar as colisoes com a lista das entidades
+            EntityMediator.verify_collision(entity_list=self.entity_list)
         pass
 
     #cada texto é como uma imagem no pygame
