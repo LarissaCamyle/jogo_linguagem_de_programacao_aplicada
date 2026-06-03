@@ -1,5 +1,6 @@
+import random
 import sys
-from backend.Const import white, window_height, lista_opcoes_menu
+from backend.Const import white, window_height, lista_opcoes_menu, evento_inimigo, tempo_spawn
 from backend.entity import Entity
 from backend.entityFactory import EntityFactory
 import pygame
@@ -21,8 +22,9 @@ class Level:
         if game_mode in [lista_opcoes_menu[1], lista_opcoes_menu[2]]:
             self.entity_list.append(EntityFactory.get_entity('Player2'))
 
-        #a cada x tempo aparece um inimig
-        pygame.time.set_timer()
+
+        #a cada 3 segundos gera o evento criado que faz aparecer um inimigo
+        pygame.time.set_timer(evento_inimigo, tempo_spawn)
         
 
     def run(self):
@@ -46,11 +48,21 @@ class Level:
                 background.move()
 
 
-            #fecha janela
+            #EVENTOS PYGAME
             for event in pygame.event.get():
+                #fecha janela
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                #evento criado, que gera um inimigo a cada 2 segundos
+                if event.type == evento_inimigo:  
+                    #escolhe aleatório entre inimigo 1 ou inimigo 2  
+                    choice = random.choice(('Enemy1', 'Enemy2'))
+
+
+                    #printa o inimigo gerado na tela
+                    self.entity_list.append(EntityFactory.get_entity(choice))
 
 
             #printa o tempo de duração da fase

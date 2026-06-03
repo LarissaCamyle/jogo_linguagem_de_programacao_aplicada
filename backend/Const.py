@@ -1,3 +1,5 @@
+import pygame
+
 #CORES  ========================================
 white = (255,255,255)
 purple = (0,0,0)
@@ -30,7 +32,9 @@ velocidade_entidades = {
     'Enemy2': 3,
 }
 
+#user event é o evento (evento de teclado por exemplo: KEYDOWN) criado pelo usuario 
+evento_inimigo = pygame.USEREVENT + 1
 
-
-
+#tempo q nasce os inimigos
+tempo_spawn = 4000
 

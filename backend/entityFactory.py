@@ -37,13 +37,15 @@ class EntityFactory:
             case 'Enemy1':
                 #                       vem fora da tela   
                 #                                           nasce aleatoriamente no eixo y
-                return Enemy('Enemy1', (window_width + 10, random.randint(0, window_height)))
+                #                      não nascerem muito alto ou muito baixo
+                return Enemy('Enemy1', (window_width + 10, random.randint(40, window_height - 40)))
             
             #entidade enemy level 1
-            case 'Enemy1':
+            case 'Enemy2':
                 #                       vem fora da tela   
                 #                                           nasce aleatoriamente no eixo y
-                return Enemy('Enemy1', (window_width + 10, random.randint(0, window_height)))
+                #                      não nascerem muito alto ou muito baixo
+                return Enemy('Enemy2', (window_width + 10, random.randint(40, window_height - 40)))
 
 
 
