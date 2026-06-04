@@ -3,6 +3,7 @@ from backend.enemy import Enemy
 from backend.entity import Entity
 from backend.Const import window_width
 from backend.EnemyShoot import EnemyShoot
+from backend.player import Player
 
 class EntityMediator:
 
@@ -30,6 +31,23 @@ class EntityMediator:
                 ent.health = 0
         pass
 
+    @staticmethod
+    #verifica as colisoes validas entre entidades
+    def __verify_collision_entity(entity1, entity2):
+        valid_collision = False
+        #se for uma entidade de inimigo e a outra um tiro do jogador --------------------
+        if isinstance(entity1, Enemy) and isinstance(entity2, PlayerShoot):
+            valid_collision = True
+        elif isinstance(entity1, PlayerShoot) and isinstance(entity2, Enemy):
+            valid_collision = True
+
+        #se for uma entidade de tiro do inimigo e a outra do jogador --------------------
+        elif isinstance(entity1, Player) and isinstance(entity2, EnemyShoot):
+            valid_collision = True
+        elif isinstance(entity1, EnemyShoot) and isinstance(entity2, Player):
+            valid_collision = True
+
+        pass
 
 
     @staticmethod
@@ -38,8 +56,18 @@ class EntityMediator:
     def verify_collision(entity_list : list[Entity]):
         #for em todas as entidades
         for i in range(len(entity_list)):
-            entity = entity_list[i]
-            EntityMediator.__verify_collision_window(entity)
+            entity1 = entity_list[i]
+            #verifica se a entidade esta na janela do jogo
+            EntityMediator.__verify_collision_window(entity1)
+
+            #compara a entidade atual do for acima com todas as outras entidades
+            #esse i+1 faz com que evite comparacoes duplicadas como comparar player1 com player1 e etc
+            for j in range(i+1, len(entity_list)):
+
+                entity2 = entity_list[j]
+                EntityMediator.__verify_collision_entity(entity1, entity2)
+
+
             
 
 
