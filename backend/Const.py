@@ -27,8 +27,12 @@ velocidade_entidades = {
     'background1img4': 5,
     'Player1': 5,
     'Player2': 5,
-    'Enemy1': 4,
-    'Enemy2': 3,
+    'Player1Shoot': 3,
+    'Player2Shoot': 4,
+    'Enemy1': 1,
+    'Enemy2': 1,
+    'Enemy1Shoot': 3,
+    'Enemy2Shoot': 3,
 }
 
 #user event é o evento (evento de teclado por exemplo: KEYDOWN) criado pelo usuario 
@@ -47,6 +51,20 @@ vida_entidades = {
     'background1img4': 999,
     'Player1': 300,
     'Player2': 300,
+    'Player1Shoot': 1,
+    'Player2Shoot': 1,
     'Enemy1': 50,
     'Enemy2': 60,
+    'Enemy1Shoot': 5,
+    'Enemy2Shoot': 2,
 }
+
+#delay quando aperta na tecla de atirar
+shoot_delay = {
+    'Player1': 20,
+    'Player2': 15,
+    'Enemy1': 100,
+    'Enemy2': 200,
+}
+
+

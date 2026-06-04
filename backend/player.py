@@ -3,14 +3,16 @@
 
 from abc import abstractmethod
 import pygame
+from backend.PlayerShoot import PlayerShoot
 from backend.entity import Entity
-from backend.Const import velocidade_entidades, window_height, window_width
+from backend.Const import velocidade_entidades, window_height, window_width, shoot_delay
 
 
 class Player(Entity):
     def __init__(self, name: str, position: tuple):
         #herda da classe entity
         super().__init__(name, position)
+        self.shoot_delay = shoot_delay[self.name]
 
     def move(self):
         #tecla pressionada
@@ -42,6 +44,7 @@ class Player(Entity):
                 #diminuindo a posição no eixo x (largura)
                 self.rect.centerx += velocidade_entidades[self.name]
 
+
         #PLAYER 2 MOVIMENTACAO -----------------------------------------------------
         else:
             #SETA PARA CIMA
@@ -68,3 +71,33 @@ class Player(Entity):
                 #diminuindo a posição no eixo x (largura)
                 self.rect.centerx += velocidade_entidades[self.name]
         pass
+
+
+    def shoot(self):
+        #faz um loop diminuindo o delay do shoot (100)
+        #para ter um tempo de intervalo entre os tiros
+        self.shoot_delay -= 1
+
+        if self.shoot_delay == 0:
+            #reseta o delay
+            self.shoot_delay = shoot_delay[self.name]
+
+            #tecla pressionada
+            pressed_key = pygame.key.get_pressed()
+            
+            #PLAYER 1 MOVIMENTAÇÃO --------------------------------------------------
+            if self.name == "Player1":
+                #CTRL DA DIREITA / TIRO JOGADOR 1
+                #se pressionar o ctrl da direita o tiro é disparado em linha reta no eixo x
+                if pressed_key[pygame.K_RCTRL]:
+                    #o tiro nasce centralizado no local onde o jogador esta no momento
+                    #                                                                   posiciona o tiro saindo da vassoura
+                    return PlayerShoot(name="Player1Shoot", position=(self.rect.centerx + 20,self.rect.centery + 23))
+
+                    #PLAYER 2 MOVIMENTACAO -----------------------------------------------------
+            else:
+                #CTRL DA ESQUERDA / TIRO JOGADOR 2
+                #se pressionar o ctrl da esquerda o tiro é disparado em linha reta no eixo x
+                if pressed_key[pygame.K_LCTRL]:
+                    #o tiro nasce centralizado no local onde o jogador esta no momento
+                    return PlayerShoot(name="Player2Shoot", position=(self.rect.centerx + 20,self.rect.centery + 19))

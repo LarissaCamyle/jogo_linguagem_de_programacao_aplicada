@@ -1,6 +1,8 @@
+from backend.PlayerShoot import PlayerShoot
 from backend.enemy import Enemy
 from backend.entity import Entity
-
+from backend.Const import window_width
+from backend.EnemyShoot import EnemyShoot
 
 class EntityMediator:
 
@@ -13,6 +15,18 @@ class EntityMediator:
         if isinstance(ent, Enemy):
             # se ultrapassar a tela e sumir deixa a vida em 0 da entidade
             if ent.rect.right < 0 :
+                ent.health = 0
+
+        #se a entidade for do tipo player shoot 
+        if isinstance(ent, PlayerShoot):
+            #se o tiro ultrapassar a tela do lado direito ele zera a vida
+            if ent.rect.left >= window_width:
+                ent.health = 0
+
+        #se a entidade for do tipo enemy shoot 
+        if isinstance(ent, EnemyShoot):
+            #se o tiro ultrapassar a tela do lado esquerdo ele zera a vida
+            if ent.rect.left <= 0:
                 ent.health = 0
         pass
 

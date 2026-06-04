@@ -1,10 +1,13 @@
 import random
 import sys
 from backend.Const import white, window_height, lista_opcoes_menu, evento_inimigo, tempo_spawn
+from backend.enemy import Enemy
 from backend.entity import Entity
 from backend.entityFactory import EntityFactory
 from backend.entityMediator import EntityMediator
 import pygame
+
+from backend.player import Player
 
 class Level:
     def __init__(self, window, name, game_mode):
@@ -40,13 +43,21 @@ class Level:
         while True:
             #60 FPS
             clock.tick(60)
-            #printando cada uma das imagens na tela
 
-            #printa imagem
-            for background in self.entity_list:
-                self.window.blit(source= background.surf, dest=background.rect)
+
+            #percorre pela lista de entidades e chama a funcao de mover
+            for entity in self.entity_list:
+                #printando cada uma das imagens na tela
+                self.window.blit(source= entity.surf, dest=entity.rect)
                 #movimento da imagem
-                background.move()
+                entity.move()
+
+                # se a entidade for player ou inimigo chama a funcao de tiro
+                if isinstance(entity, (Player,Enemy)):
+                    shoot = entity.shoot()
+                    #se existir um tiro adiciona na lista de entidades
+                    if shoot is not None:
+                        self.entity_list.append(shoot)
 
 
             #EVENTOS PYGAME
