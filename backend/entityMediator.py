@@ -31,6 +31,26 @@ class EntityMediator:
                 ent.health = 0
         pass
 
+
+    @staticmethod
+    #da pontos para os jogadores que mataram o inimigo
+    def __give_score(enemy: Enemy, entity_list: list[Entity]):
+        #se quem matou o inimigo foi o player 1
+        if enemy.last_damage == "Player1Shoot":
+            #Encontra o jogador 1
+            for ent in entity_list:
+                if ent.name == 'Player1':
+                    #o jogador 1 ganha pontos referente ao inimigo que foi eliminado
+                    ent.score += enemy.score
+        #se quem matou o inimigo foi o player 2
+        elif enemy.last_damage == "Player2Shoot":
+            #Encontra o jogador 2
+            for ent in entity_list:
+                if ent.name == 'Player2':
+                    #o jogador 2 ganha pontos referente ao inimigo que foi eliminado
+                    ent.score += enemy.score
+
+
     @staticmethod
     #verifica as colisoes validas entre entidades
     def __verify_collision_entity(entity1, entity2):
@@ -47,7 +67,28 @@ class EntityMediator:
         elif isinstance(entity1, EnemyShoot) and isinstance(entity2, Player):
             valid_collision = True
 
-        pass
+        #se aconteceu uma colisao valida
+        #se as imagens colidiram/estao dentro uma da outra ou ocupando o mesmo espaço
+        if valid_collision == True:
+            #se todas as especificacoes forem true aconteceu uma colisao --------------------------------
+                #1.se a borda da direita da img da ent1 estiver á direita da borda esquerda da img da ent2                                   
+            if (entity1.rect.right >= entity2.rect.left and
+                #2.se a borda da esquerda ent1 estiver á esquerda da borda da direita da img da ent2 
+                entity1.rect.left <= entity2.rect.right and
+                #3. se a borda de baixo da img ent1 estiver abaixo da borda de cima da img da ent2
+                entity1.rect.bottom >= entity2.rect.top and
+                #4. se a borda de cima da img ent1 estiver acima da borda inferior da img da ent2
+                entity1.rect.top <= entity2.rect.bottom):
+                
+                #diminui a vida da entidade um de acordo com o dano q a entidade 2 causa
+                entity1.health -= entity2.damage
+                entity2.health -= entity1.damage
+
+                #recebe quem deu o ultimo dano
+                entity1.last_damage = entity2.name
+                entity2.last_damage = entity1.name
+
+
 
 
     @staticmethod
@@ -78,6 +119,10 @@ class EntityMediator:
         for ent in entity_list:
             #se a vida for igual ou menor que 0 remove a entidade da lista
             if ent.health <= 0:
+                #se quem morreu foi um inimigo chama a entidade p dar pontos p quem matou o inimigo
+                if isinstance(ent, Enemy):
+                    EntityMediator.__give_score(ent, entity_list)
+                #remove a entidade do jogo
                 entity_list.remove(ent)
 
 

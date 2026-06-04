@@ -67,4 +67,39 @@ shoot_delay = {
     'Enemy2': 200,
 }
 
+entidade_dano = {
+    'background1img0': 0,
+    #imagem nao se move
+    'background1img1': 0,
+    'background1img2': 0,
+    'background1img3': 0,
+    'background1img4': 0,
+    'Player1': 1,
+    'Player2': 1,
+    'Player1Shoot': 25,
+    'Player2Shoot': 25,
+    'Enemy1': 1,
+    'Enemy2': 1,
+    'Enemy1Shoot': 20,
+    'Enemy2Shoot': 15,
+}
+
+#os pontos que os jogadores recebem de acordo com cada inimigo morto
+score_entidades = {
+    'background1img0': 0,
+    #imagem nao se move
+    'background1img1': 0,
+    'background1img2': 0,
+    'background1img3': 0,
+    'background1img4': 0,
+    'Player1': 0,
+    'Player2': 0,
+    'Player1Shoot': 0,
+    'Player2Shoot': 0,
+    'Enemy1': 100,
+    'Enemy2': 125,
+    'Enemy1Shoot': 0,
+    'Enemy2Shoot': 0,
+}
+
 

@@ -60,6 +60,14 @@ class Level:
                         self.entity_list.append(shoot)
 
 
+                #Printa a vida dos jogadores
+                if entity.name == 'Player1':
+                    self.level_text(20, f'Player 1 - Health : {entity.health} | Score : {entity.score}', white, (10, 20))
+                if entity.name == 'Player2':
+                    self.level_text(20, f'Player 2 - Health : {entity.health} | Score : {entity.score}', white, (10, 35))
+
+
+
             #EVENTOS PYGAME
             for event in pygame.event.get():
                 #fecha janela
@@ -75,6 +83,8 @@ class Level:
 
                     #printa o inimigo gerado na tela
                     self.entity_list.append(EntityFactory.get_entity(choice))
+
+
 
 
             #printa o tempo de duração da fase
