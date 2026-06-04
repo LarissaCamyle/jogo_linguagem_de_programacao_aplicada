@@ -25,6 +25,19 @@ class EntityFactory:
 
                 return lista_bg
             
+            #entidade imagens background level 2
+            case 'Level2Bg':
+                lista_bg = []
+
+                #pega todos os background e coloca na lista
+                for i in range(5):
+                    #carrega as 5 imagens no começo da tela
+                    lista_bg.append(Background(f'background2img{i}', (0,0)))
+                    #carrega as 5 imagens no final da tela
+                    lista_bg.append(Background(f'background2img{i}', (window_width,0)))
+
+                return lista_bg
+            
             #entidade player 1 level 1
             case 'Player1':
                 return Player('Player1', (20, window_height / 2 - 60))

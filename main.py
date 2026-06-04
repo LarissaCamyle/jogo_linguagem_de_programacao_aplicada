@@ -1,4 +1,4 @@
-#AULA PRATICA 5 16:20
+#AULA PRATICA 7 30:00
 from backend.Game import Game
 #inicializa
 

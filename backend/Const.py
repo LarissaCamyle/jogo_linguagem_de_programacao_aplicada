@@ -25,6 +25,11 @@ velocidade_entidades = {
     'background1img2': 3,
     'background1img3': 4,
     'background1img4': 5,
+    'background2img0': 3,
+    'background2img1': 0,
+    'background2img2': 3,
+    'background2img3': 4,
+    'background2img4': 5,
     'Player1': 5,
     'Player2': 5,
     'Player1Shoot': 3,
@@ -38,17 +43,30 @@ velocidade_entidades = {
 #user event é o evento (evento de teclado por exemplo: KEYDOWN) criado pelo usuario 
 evento_inimigo = pygame.USEREVENT + 1
 
+evento_vitoria= pygame.USEREVENT + 2
+
 #tempo q nasce os inimigos
 tempo_spawn = 4000
+
+#tempo de verificacao para saber quando o jogador venceu a fase
+tempo_de_verificacao = 100
+
+#duracao do level em 20 segundos
+duracao_do_level = 20000
+
 
 
 vida_entidades = {
     'background1img0': 999,
-    #imagem nao se move
     'background1img1': 999,
     'background1img2': 999,
     'background1img3': 999,
     'background1img4': 999,
+    'background2img0': 999,
+    'background2img1': 999,
+    'background2img2': 999,
+    'background2img3': 999,
+    'background2img4': 999,
     'Player1': 300,
     'Player2': 300,
     'Player1Shoot': 1,
@@ -69,11 +87,15 @@ shoot_delay = {
 
 entidade_dano = {
     'background1img0': 0,
-    #imagem nao se move
     'background1img1': 0,
     'background1img2': 0,
     'background1img3': 0,
     'background1img4': 0,
+    'background2img0': 0,
+    'background2img1': 0,
+    'background2img2': 0,
+    'background2img3': 0,
+    'background2img4': 0,
     'Player1': 1,
     'Player2': 1,
     'Player1Shoot': 25,
@@ -87,11 +109,15 @@ entidade_dano = {
 #os pontos que os jogadores recebem de acordo com cada inimigo morto
 score_entidades = {
     'background1img0': 0,
-    #imagem nao se move
     'background1img1': 0,
     'background1img2': 0,
     'background1img3': 0,
     'background1img4': 0,
+    'background2img0': 0,
+    'background2img1': 0,
+    'background2img2': 0,
+    'background2img3': 0,
+    'background2img4': 0,
     'Player1': 0,
     'Player2': 0,
     'Player1Shoot': 0,

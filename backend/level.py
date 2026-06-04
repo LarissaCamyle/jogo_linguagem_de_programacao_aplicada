@@ -1,6 +1,6 @@
 import random
 import sys
-from backend.Const import white, window_height, lista_opcoes_menu, evento_inimigo, tempo_spawn
+from backend.Const import white, window_height, lista_opcoes_menu, evento_inimigo, tempo_spawn, evento_vitoria, tempo_de_verificacao, duracao_do_level
 from backend.enemy import Enemy
 from backend.entity import Entity
 from backend.entityFactory import EntityFactory
@@ -10,25 +10,32 @@ import pygame
 from backend.player import Player
 
 class Level:
-    def __init__(self, window, name, game_mode):
+    def __init__(self, window, name, game_mode, player_score : list[int]):
         self.window = window
         self.name = name
         self.game_mode = game_mode
         #lista das entidades do level 1
         self.entity_list : list[Entity] = []
         #pega todos os arquivos do background 1 e adiciona na lista de entidades
-        self.entity_list.extend(EntityFactory.get_entity('Level1Bg'))
+        self.entity_list.extend(EntityFactory.get_entity(self.name+'Bg'))
         #adiciona o player 1 na lista de entidades
-        self.entity_list.append(EntityFactory.get_entity('Player1'))
-        self.timeout = 20000 #20 segundos
+        player = EntityFactory.get_entity('Player1')
+        player.sco
 
         #se no menu for escolhido a opção cooperativo ou competitivo adiciona o player 2 como entidade
         if game_mode in [lista_opcoes_menu[1], lista_opcoes_menu[2]]:
             self.entity_list.append(EntityFactory.get_entity('Player2'))
 
+        #tempo de duracao da fase
+        self.timeout = duracao_do_level
 
         #a cada 3 segundos gera o evento criado que faz aparecer um inimigo
         pygame.time.set_timer(evento_inimigo, tempo_spawn)
+
+        #a cada 100 mili segundos testa para ver se o jogador venceu a fase
+        pygame.time.set_timer(evento_vitoria, tempo_de_verificacao)
+
+
         
 
     def run(self):
@@ -84,7 +91,23 @@ class Level:
                     #printa o inimigo gerado na tela
                     self.entity_list.append(EntityFactory.get_entity(choice))
 
+                #vai diminuindo o tempo da variavel timeout responsavel pela duracao do jogo
+                if event.type == evento_vitoria:
+                    self.timeout -= tempo_de_verificacao
 
+                    #se o tempo da partida acabou retorna true e finaliza a fase
+                    if self.timeout == 0:
+                        return True
+
+                player_encontrado = False
+                for ent in self.entity_list:
+                    if isinstance(ent, Player):
+                        player_encontrado = True
+
+                
+                if player_encontrado == False:
+                    #se nao existir nenhum jogador encerra o level retornando false
+                    return False
 
 
             #printa o tempo de duração da fase

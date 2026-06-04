@@ -18,8 +18,18 @@ class Game:
 
             #opcao iniciar jogo
             if menu_return in [lista_opcoes_menu[0], lista_opcoes_menu[1], lista_opcoes_menu[2]]:
-                level = Level(self.window, 'Level1', menu_return)
-                level_return = level.run()
+                #[Player1, Player2]
+                player_score = [0, 0]
+
+                level = Level(self.window, 'Level1', menu_return, player_score)
+                level_return = level.run(player_score)
+
+                #se vencer o level 1 vai para o level 2
+                if level_return == True:
+                    level = Level(self.window, 'Level2', menu_return, player_score)
+                    level_return = level.run(player_score)
+
+
             #opcao sair do jogo
             if menu_return == lista_opcoes_menu[4]:
                 pygame.quit()
