@@ -1,5 +1,5 @@
 from tkinter.font import Font
-from backend.Const import window_height, window_width, white, lista_opcoes_menu, purple
+from backend.Const import window_height, window_width, branco, lista_opcoes_menu, roxo
 
 import pygame
 
@@ -31,16 +31,16 @@ class Menu:
             self.window.blit(source= self.imagem, dest= self.background)
 
             #texto print na tela
-            self.menu_text(50, "Jogo Teste",white, ((window_width / 2), 40))
+            self.menu_text(50, "Jogo Teste",branco, ((window_width / 2), 40))
 
             #printa os textos do menu
             for i in range (len(lista_opcoes_menu)):
                 #se a linha/opcão estiver selecionado o texto fica lilas
                 if i == contador_opcoes_menu:
-                    self.menu_text(20, lista_opcoes_menu[i], purple, ((window_width / 2), 300 + 30 * i))
+                    self.menu_text(20, lista_opcoes_menu[i], roxo, ((window_width / 2), 300 + 30 * i))
                 #se a linha/opcão não estiver selecionado o texto fica branco
                 else:
-                    self.menu_text(20, lista_opcoes_menu[i], white, ((window_width / 2), 300 + 30 * i))
+                    self.menu_text(20, lista_opcoes_menu[i], branco, ((window_width / 2), 300 + 30 * i))
 
 
             #atualiza a tela para printar a imagem selecionada como imagem de fundo

@@ -1,6 +1,6 @@
 import random
 import sys
-from backend.Const import white, window_height, lista_opcoes_menu, evento_inimigo, tempo_spawn, evento_vitoria, tempo_de_verificacao, duracao_do_level
+from backend.Const import branco, window_height, lista_opcoes_menu, evento_inimigo, tempo_spawn, evento_vitoria, tempo_de_verificacao, duracao_do_level
 from backend.enemy import Enemy
 from backend.entity import Entity
 from backend.entityFactory import EntityFactory
@@ -69,9 +69,9 @@ class Level:
 
                 #Printa a vida dos jogadores
                 if entity.name == 'Player1':
-                    self.level_text(20, f'Player 1 - Health : {entity.health} | Score : {entity.score}', white, (10, 20))
+                    self.level_text(20, f'Player 1 - Health : {entity.health} | Score : {entity.score}', branco, (10, 20))
                 if entity.name == 'Player2':
-                    self.level_text(20, f'Player 2 - Health : {entity.health} | Score : {entity.score}', white, (10, 35))
+                    self.level_text(20, f'Player 2 - Health : {entity.health} | Score : {entity.score}', branco, (10, 35))
 
 
 
@@ -85,7 +85,7 @@ class Level:
                 #evento criado, que gera um inimigo a cada 2 segundos
                 if event.type == evento_inimigo:  
                     #escolhe aleatório entre inimigo 1 ou inimigo 2  
-                    choice = random.choice(('Enemy1', 'Enemy2'))
+                    choice = random.choice(('Enemy1', 'Enemy2', 'Enemy3'))
 
 
                     #printa o inimigo gerado na tela
@@ -111,11 +111,11 @@ class Level:
 
 
             #printa o tempo de duração da fase
-            self.level_text(16, f'{self.name} = Timeout: {self.timeout / 1000 : .1f}s', white, (10,5))
+            self.level_text(16, f'{self.name} = Timeout: {self.timeout / 1000 : .1f}s', branco, (10,5))
             #printa o FPS
-            self.level_text(16, f'FPS: {clock.get_fps() :.0f}', white,(10, window_height - 35))
+            self.level_text(16, f'FPS: {clock.get_fps() :.0f}', branco,(10, window_height - 35))
             #quantos personagens tem na tela
-            self.level_text(16, f'Entidades: {len(self.entity_list)}', white, (10, window_height - 20))
+            self.level_text(16, f'Entidades: {len(self.entity_list)}', branco, (10, window_height - 20))
 
             #printa tudo na tela
             pygame.display.flip()

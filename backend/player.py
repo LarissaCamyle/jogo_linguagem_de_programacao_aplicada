@@ -5,14 +5,14 @@ from abc import abstractmethod
 import pygame
 from backend.PlayerShoot import PlayerShoot
 from backend.entity import Entity
-from backend.Const import velocidade_entidades, window_height, window_width, shoot_delay
+from backend.Const import velocidade_entidades, window_height, window_width, tiro_delay
 
 
 class Player(Entity):
     def __init__(self, name: str, position: tuple):
         #herda da classe entity
         super().__init__(name, position)
-        self.shoot_delay = shoot_delay[self.name]
+        self.tiro_delay = tiro_delay[self.name]
 
     def move(self):
         #tecla pressionada
@@ -76,11 +76,11 @@ class Player(Entity):
     def shoot(self):
         #faz um loop diminuindo o delay do shoot (100)
         #para ter um tempo de intervalo entre os tiros
-        self.shoot_delay -= 1
+        self.tiro_delay -= 1
 
-        if self.shoot_delay == 0:
+        if self.tiro_delay == 0:
             #reseta o delay
-            self.shoot_delay = shoot_delay[self.name]
+            self.tiro_delay = tiro_delay[self.name]
 
             #tecla pressionada
             pressed_key = pygame.key.get_pressed()

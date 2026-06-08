@@ -1,8 +1,8 @@
 import pygame
 
 #CORES  ========================================
-white = (255,255,255)
-purple = (0,0,0)
+branco = (255,255,255)
+roxo = (0,0,0)
 
 
 
@@ -78,7 +78,7 @@ vida_entidades = {
 }
 
 #delay quando aperta na tecla de atirar
-shoot_delay = {
+tiro_delay = {
     'Player1': 20,
     'Player2': 15,
     'Enemy1': 100,
