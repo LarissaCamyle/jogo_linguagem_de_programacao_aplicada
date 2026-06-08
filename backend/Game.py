@@ -1,5 +1,6 @@
 import pygame
 from backend.Menu import Menu
+from backend.Score import Score
 from backend.Const import window_width, window_height, lista_opcoes_menu
 from backend.level import Level
 
@@ -11,6 +12,8 @@ class Game:
 
     def run (self):
         while True:  
+            score = Score(self.window)
+
 
             #Inicializa o menu
             menu = Menu(self.window)
