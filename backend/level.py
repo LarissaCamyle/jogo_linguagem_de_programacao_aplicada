@@ -18,13 +18,23 @@ class Level:
         self.entity_list : list[Entity] = []
         #pega todos os arquivos do background 1 e adiciona na lista de entidades
         self.entity_list.extend(EntityFactory.get_entity(self.name+'Bg'))
-        #adiciona o player 1 na lista de entidades
+        
+        #cria o jogador
         player = EntityFactory.get_entity('Player1')
-        player.sco
+        #pontos player1
+        player.score = player_score[0]
+        #adiciona o player 1 na lista de entidades
+        self.entity_list.append(player)
+
 
         #se no menu for escolhido a opção cooperativo ou competitivo adiciona o player 2 como entidade
         if game_mode in [lista_opcoes_menu[1], lista_opcoes_menu[2]]:
-            self.entity_list.append(EntityFactory.get_entity('Player2'))
+            #cria o jogador
+            player = EntityFactory.get_entity('Player2')
+            #pontos player 2
+            player.score = player_score[1]
+            #adiciona o player 2 na lista de entidades
+            self.entity_list.append(player)
 
         #tempo de duracao da fase
         self.timeout = duracao_do_level
@@ -38,7 +48,7 @@ class Level:
 
         
 
-    def run(self):
+    def run(self, player_score : list[int]):
         #carregar musica
         pygame.mixer_music.load(f'./backend/musicas/{self.name}.mp3')
         pygame.mixer_music.play(-1)
@@ -69,9 +79,9 @@ class Level:
 
                 #Printa a vida dos jogadores
                 if entity.name == 'Player1':
-                    self.level_text(20, f'Player 1 - Health : {entity.health} | Score : {entity.score}', branco, (10, 20))
+                    self.level_text(20, f'Player 1 - Health : {entity.health} | Score : {entity.score}', branco, (10, 30))
                 if entity.name == 'Player2':
-                    self.level_text(20, f'Player 2 - Health : {entity.health} | Score : {entity.score}', branco, (10, 35))
+                    self.level_text(20, f'Player 2 - Health : {entity.health} | Score : {entity.score}', branco, (10, 55))
 
 
 
@@ -97,6 +107,14 @@ class Level:
 
                     #se o tempo da partida acabou retorna true e finaliza a fase
                     if self.timeout == 0:
+
+                        #salva os pontos dos jogadores
+                        for ent in self.entity_list:
+                            if isinstance(ent, Player) and ent.name == 'Player1':
+                                player_score[0] = ent.score
+                            if isinstance(ent, Player) and ent.name == 'Player2':
+                                player_score[1] = ent.score
+
                         return True
 
                 player_encontrado = False
@@ -111,11 +129,11 @@ class Level:
 
 
             #printa o tempo de duração da fase
-            self.level_text(16, f'{self.name} = Timeout: {self.timeout / 1000 : .1f}s', branco, (10,5))
+            self.level_text(18, f'{self.name} = Timeout: {self.timeout / 1000 : .1f}s', branco, (10,5))
             #printa o FPS
-            self.level_text(16, f'FPS: {clock.get_fps() :.0f}', branco,(10, window_height - 35))
+            self.level_text(18, f'FPS: {clock.get_fps() :.0f}', branco,(10, window_height - 35))
             #quantos personagens tem na tela
-            self.level_text(16, f'Entidades: {len(self.entity_list)}', branco, (10, window_height - 20))
+            self.level_text(18, f'Entidades: {len(self.entity_list)}', branco, (10, window_height - 20))
 
             #printa tudo na tela
             pygame.display.flip()

@@ -36,8 +36,10 @@ velocidade_entidades = {
     'Player2Shoot': 4,
     'Enemy1': 1,
     'Enemy2': 1,
+    'Enemy3': 1,
     'Enemy1Shoot': 3,
     'Enemy2Shoot': 3,
+    'Enemy3Shoot': 3,
 }
 
 #user event é o evento (evento de teclado por exemplo: KEYDOWN) criado pelo usuario 
@@ -73,8 +75,10 @@ vida_entidades = {
     'Player2Shoot': 1,
     'Enemy1': 50,
     'Enemy2': 60,
+    'Enemy3': 60,
     'Enemy1Shoot': 5,
     'Enemy2Shoot': 2,
+    'Enemy3Shoot': 2,
 }
 
 #delay quando aperta na tecla de atirar
@@ -83,6 +87,7 @@ tiro_delay = {
     'Player2': 15,
     'Enemy1': 100,
     'Enemy2': 200,
+    'Enemy3': 200,
 }
 
 entidade_dano = {
@@ -102,8 +107,10 @@ entidade_dano = {
     'Player2Shoot': 25,
     'Enemy1': 1,
     'Enemy2': 1,
+    'Enemy3': 1,
     'Enemy1Shoot': 20,
     'Enemy2Shoot': 15,
+    'Enemy3Shoot': 15,
 }
 
 #os pontos que os jogadores recebem de acordo com cada inimigo morto
@@ -124,8 +131,10 @@ score_entidades = {
     'Player2Shoot': 0,
     'Enemy1': 100,
     'Enemy2': 125,
+    'Enemy3': 125,
     'Enemy1Shoot': 0,
     'Enemy2Shoot': 0,
+    'Enemy3Shoot': 0,
 }
 
 
