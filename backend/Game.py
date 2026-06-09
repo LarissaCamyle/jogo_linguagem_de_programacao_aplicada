@@ -32,6 +32,12 @@ class Game:
                     level = Level(self.window, 'Level2', menu_return, player_score)
                     level_return = level.run(player_score)
 
+                    score.save_score(menu_return, player_score)
+
+
+            #opção de mostrar o score
+            if menu_return == lista_opcoes_menu[3]:
+                score.show_score()
 
             #opcao sair do jogo
             if menu_return == lista_opcoes_menu[4]:

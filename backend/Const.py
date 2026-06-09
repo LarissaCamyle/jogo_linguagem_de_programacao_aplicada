@@ -54,7 +54,7 @@ tempo_spawn = 4000
 tempo_de_verificacao = 100
 
 #duracao do level em 20 segundos
-duracao_do_level = 20000
+duracao_do_level = 10000
 
 
 
@@ -137,4 +137,19 @@ score_entidades = {
     'Enemy3Shoot': 0,
 }
 
-
+estilo_texto = {
+    'Title': (window_width / 2, 50),
+    'EnterName': (window_width / 2, 80),
+    'Label': (window_width / 2, 90),
+    'Name': (window_width / 2, 110),
+    0: (window_width / 2, 110),
+    1: (window_width / 2, 130),
+    2: (window_width / 2, 150),
+    3: (window_width / 2, 170),
+    4: (window_width / 2, 190),
+    5: (window_width / 2, 210),
+    6: (window_width / 2, 230),
+    7: (window_width / 2, 250),
+    8: (window_width / 2, 270),
+    9: (window_width / 2, 290),
+}
