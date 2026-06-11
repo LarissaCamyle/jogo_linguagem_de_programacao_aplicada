@@ -1,3 +1,4 @@
+import datetime
 import sys
 
 import pygame
@@ -25,6 +26,9 @@ class Score:
 
         #imagem
         self.window.blit(source= self.imagem, dest=self.background)
+
+        #nome do jogador
+        name = ''
 
         while True:
             self.score_text(48, "YOU WIN!!", branco, estilo_texto['Title'] )
@@ -60,6 +64,22 @@ class Score:
                     pygame.quit()
                     sys.exit()
 
+                elif event.type ==  pygame.KEYDOWN:
+                    #se clicou em enter verifica se oq foi escrito antes tem 10 ou menos caracteres
+                    if event.key == pygame.K_RETURN and len(name) <= 10:
+                        #inserir no banco de dados
+                        db_proxy.save({'name' : name, 'score': score, 'date': get_formatted_date()})
+                    #apagar oq foi escrito
+                    elif event.key == pygame.K_BACKSPACE:
+                        pass
+                    #se foi escrito uma letra ele vai armazenando na variavel nome
+                    else:
+                        if len(name) < 10:
+                            name += event.unicode
+
+            self.score_text(25, name, branco, estilo_texto['Name'] )
+
+
             pygame.display.flip()
             pass
 
@@ -88,3 +108,9 @@ class Score:
         text_rect: pygame.Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)
 
+#retorna a data
+def get_formatted_date():
+    current_datetime = datetime.now()
+    current_time = current_datetime.strftime("%H:%M")
+    current_date = current_datetime.strftime("%d/%m/%y")
+    return f"{current_time} - {current_date}"

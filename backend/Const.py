@@ -53,7 +53,7 @@ tempo_spawn = 4000
 tempo_de_verificacao = 100
 
 #duracao do level em 20 segundos
-duracao_do_level = 5000
+duracao_do_level = 20000
 
 
 
