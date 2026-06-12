@@ -1,6 +1,6 @@
 import datetime
 import sys
-
+from datetime import datetime
 import pygame
 from backend.Const import branco, estilo_texto, lista_opcoes_menu
 from backend.DBProxy import DBProxy
@@ -24,13 +24,13 @@ class Score:
         #                  nome do banco de dados
         db_proxy = DBProxy('DBScore')
 
-        #imagem
-        self.window.blit(source= self.imagem, dest=self.background)
-
         #nome do jogador
         name = ''
 
         while True:
+            #imagem
+            self.window.blit(source= self.imagem, dest=self.background)
+
             self.score_text(48, "YOU WIN!!", branco, estilo_texto['Title'] )
             
 
@@ -38,23 +38,19 @@ class Score:
             if game_mode == lista_opcoes_menu[0]:
                 #salva o score do jogador 1
                 score = player_score[0]
-                texto_pontuacao = f"PONTOS : {player_score[0]}"
-                texto_nome = " Player 1 enter your name (10 characters)"
+                texto_nome = f"PONTOS : {player_score[0]}  |  Player 1 enter your name (10 characters)"
 
             #dois jogadores
             if game_mode == lista_opcoes_menu[1]:
                 #salva o score do jogador que estiver com mais pontos
                 if player_score[0] >= player_score[1]:
-                    player_score[0]
-                    texto_pontuacao = f"PONTOS : {player_score[0]}"
-                    texto_nome = "Player 1 enter your name (10 characters)"
+                    score = player_score[0]
+                    texto_nome = f"PONTOS : {player_score[0]}  |  Player 1 enter your name (10 characters)"
                 else:
-                    player_score[1]
-                    texto_pontuacao = f"PONTOS : {player_score[1]}" 
-                    texto_nome = "Player 2 enter your name (10 characters)"
+                    score = player_score[1]
+                    texto_nome = f"PONTOS : {player_score[1]}  |  Player 1 enter your name (10 characters)"
 
-            self.score_text(26, texto_pontuacao, branco, estilo_texto['EnterName'] )
-            self.score_text(20, texto_nome, branco, estilo_texto['Label'] )
+            self.score_text(20, texto_nome, branco, estilo_texto['EnterName'] )
 
 
 
@@ -68,16 +64,19 @@ class Score:
                     #se clicou em enter verifica se oq foi escrito antes tem 10 ou menos caracteres
                     if event.key == pygame.K_RETURN and len(name) <= 10:
                         #inserir no banco de dados
-                        db_proxy.save({'name' : name, 'score': score, 'date': get_formatted_date()})
+                        db_proxy.save({'self': self, 'name' : name, 'score': score, 'date': get_formatted_date()})
+                        #troca a tela
+                        self.show_score()
                     #apagar oq foi escrito
                     elif event.key == pygame.K_BACKSPACE:
-                        pass
+                        #apaga o ultimo caracter
+                        name = name[:-1]
                     #se foi escrito uma letra ele vai armazenando na variavel nome
                     else:
                         if len(name) < 10:
                             name += event.unicode
 
-            self.score_text(25, name, branco, estilo_texto['Name'] )
+            self.score_text(25, name, branco, estilo_texto['Label'] )
 
 
             pygame.display.flip()
@@ -94,10 +93,31 @@ class Score:
         #imagem
         self.window.blit(source= self.imagem, dest=self.background)
 
+        self.score_text(48, "TOP 10 SCORE", branco, estilo_texto['Title'] )
+
+        self.score_text(20, 'NAME           SCORE           DATE', branco, estilo_texto['Name']) 
+
+        #retorna a lista dos top 10 usuarios
+        db_proxy = DBProxy('DBScore')
+        lista_score = DBProxy.score_top10()
+        db_proxy.close()
+
+        for player_score in lista_score:
+            id, name, score, date = player_score
+            self.score_text(20, f'{name}          {score :05d}      {date}', branco, estilo_texto[lista_score.index(player_score)])
+
         while True:
-            
+            #btn de fechar janela
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return
             pygame.display.flip()
-            pass
+            
 
 
 
