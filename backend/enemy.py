@@ -25,7 +25,7 @@ class Enemy(Entity):
             #reseta o delay
             self.tiro_delay = tiro_delay[self.name]
             #retorna o tiro na posicao do inimigo
-            return EnemyShoot(name=f'{self.name}Shoot', position=(self.rect.centerx,self.rect.centery))
+            return EnemyShoot(name=f'{self.name}Shoot', position=(self.rect.centerx-30,self.rect.centery-10))
 
 
 

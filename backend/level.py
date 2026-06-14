@@ -79,9 +79,9 @@ class Level:
 
                 #Printa a vida dos jogadores
                 if entity.name == 'Player1':
-                    self.level_text(20, f'Player 1 - Health : {entity.health} | Score : {entity.score}', branco, (10, 30))
+                    self.level_text(12, f'Player 1 - Health : {entity.health} | Score : {entity.score}', branco, (10, 30))
                 if entity.name == 'Player2':
-                    self.level_text(20, f'Player 2 - Health : {entity.health} | Score : {entity.score}', branco, (10, 55))
+                    self.level_text(12, f'Player 2 - Health : {entity.health} | Score : {entity.score}', branco, (10, 55))
 
 
 
@@ -129,11 +129,11 @@ class Level:
 
 
             #printa o tempo de duração da fase
-            self.level_text(18, f'{self.name} = Timeout: {self.timeout / 1000 : .1f}s', branco, (10,5))
+            self.level_text(12, f'{self.name} = Timeout: {self.timeout / 1000 : .1f}s', branco, (10,5))
             #printa o FPS
-            self.level_text(18, f'FPS: {clock.get_fps() :.0f}', branco,(10, window_height - 35))
+            self.level_text(12, f'FPS: {clock.get_fps() :.0f}', branco,(10, window_height - 35))
             #quantos personagens tem na tela
-            self.level_text(18, f'Entidades: {len(self.entity_list)}', branco, (10, window_height - 20))
+            self.level_text(12, f'Entidades: {len(self.entity_list)}', branco, (10, window_height - 20))
 
             #printa tudo na tela
             pygame.display.flip()
@@ -147,7 +147,10 @@ class Level:
 
     #cada texto é como uma imagem no pygame
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
-        text_font: pygame.Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
+        text_font = pygame.font.Font(
+            "backend/fonts/Press_Start_2P/PressStart2P-Regular.ttf",
+            text_size
+        )
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: pygame.Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)

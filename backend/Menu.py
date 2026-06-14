@@ -30,17 +30,14 @@ class Menu:
             #adiciona a imagem no background
             self.window.blit(source= self.imagem, dest= self.background)
 
-            #texto print na tela
-            self.menu_text(50, "Jogo Teste",branco, ((window_width / 2), 40))
-
             #printa os textos do menu
             for i in range (len(lista_opcoes_menu)):
                 #se a linha/opcão estiver selecionado o texto fica lilas
                 if i == contador_opcoes_menu:
-                    self.menu_text(20, lista_opcoes_menu[i], roxo, ((window_width / 2), 300 + 30 * i))
+                    self.menu_text(20, lista_opcoes_menu[i], roxo, ((window_width / 2), 300 + 40 * i))
                 #se a linha/opcão não estiver selecionado o texto fica branco
                 else:
-                    self.menu_text(20, lista_opcoes_menu[i], branco, ((window_width / 2), 300 + 30 * i))
+                    self.menu_text(18, lista_opcoes_menu[i], branco, ((window_width / 2), 300 + 40 * i))
 
 
             #atualiza a tela para printar a imagem selecionada como imagem de fundo
@@ -103,7 +100,10 @@ class Menu:
 
     #cada texto é como uma imagem no pygame
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        text_font: pygame.Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
+        text_font = pygame.font.Font(
+            "backend/fonts/Press_Start_2P/PressStart2P-Regular.ttf",
+            text_size
+        )
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: pygame.Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)

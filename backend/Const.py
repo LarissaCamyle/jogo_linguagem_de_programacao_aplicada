@@ -2,7 +2,7 @@ import pygame
 
 #CORES  ========================================
 branco = (255,255,255)
-roxo = (0,0,0)
+roxo = (144, 110, 255)
 
 
 
@@ -11,8 +11,8 @@ window_width = 800
 window_height = 450
 
 
-lista_opcoes_menu= ('NEW GAME 1P',
-            'NEW GAME 2P - COMPETITIVE',
+lista_opcoes_menu= ('NEW GAME 1 PLAYER',
+            'NEW GAME 2 PLAYERS',
             'SCORE',
             'EXIT')
 
@@ -31,8 +31,8 @@ velocidade_entidades = {
     'background2img4': 5,
     'Player1': 5,
     'Player2': 5,
-    'Player1Shoot': 3,
-    'Player2Shoot': 4,
+    'Player1Shoot': 5,
+    'Player2Shoot': 5,
     'Enemy1': 1,
     'Enemy2': 1,
     'Enemy3': 1,
@@ -47,13 +47,13 @@ evento_inimigo = pygame.USEREVENT + 1
 evento_vitoria= pygame.USEREVENT + 2
 
 #tempo q nasce os inimigos
-tempo_spawn = 4000
+tempo_spawn = 3000
 
 #tempo de verificacao para saber quando o jogador venceu a fase
 tempo_de_verificacao = 100
 
 #duracao do level em 20 segundos
-duracao_do_level = 1000
+duracao_do_level = 3000
 
 
 
@@ -85,8 +85,8 @@ tiro_delay = {
     'Player1': 20,
     'Player2': 15,
     'Enemy1': 100,
-    'Enemy2': 200,
-    'Enemy3': 200,
+    'Enemy2': 150,
+    'Enemy3': 150,
 }
 
 entidade_dano = {
@@ -137,10 +137,10 @@ score_entidades = {
 }
 
 estilo_texto = {
-    'Title': (window_width / 2, 50),
-    'EnterName': (window_width / 2, 100),
-    'Label': (window_width / 2, 120),
-    'Name': (window_width / 2, 150),
+    'Title': (window_width / 2, 80),
+    'EnterName': (window_width / 2, 150),
+    'Label': (window_width / 2, 180),
+    'Name': (window_width / 2, 200),
     0: (window_width / 2, 170),
     1: (window_width / 2, 190),
     2: (window_width / 2, 210),

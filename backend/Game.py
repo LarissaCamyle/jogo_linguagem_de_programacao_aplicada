@@ -36,11 +36,11 @@ class Game:
 
 
             #opção de mostrar o score
-            if menu_return == lista_opcoes_menu[3]:
+            if menu_return == lista_opcoes_menu[2]:
                 score.show_score()
 
             #opcao sair do jogo
-            if menu_return == lista_opcoes_menu[4]:
+            if menu_return == lista_opcoes_menu[3]:
                 pygame.quit()
                 quit()
 
