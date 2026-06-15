@@ -36,9 +36,13 @@ velocidade_entidades = {
     'Enemy1': 1,
     'Enemy2': 1,
     'Enemy3': 1,
+    'Enemy4': 1,
+    'Enemy5': 1,
     'Enemy1Shoot': 3,
     'Enemy2Shoot': 3,
     'Enemy3Shoot': 3,
+    'Enemy4Shoot': 3,
+    'Enemy5Shoot': 3,
 }
 
 #user event é o evento (evento de teclado por exemplo: KEYDOWN) criado pelo usuario 
@@ -47,13 +51,13 @@ evento_inimigo = pygame.USEREVENT + 1
 evento_vitoria= pygame.USEREVENT + 2
 
 #tempo q nasce os inimigos
-tempo_spawn = 3000
+tempo_spawn = 2000
 
 #tempo de verificacao para saber quando o jogador venceu a fase
 tempo_de_verificacao = 100
 
 #duracao do level em 20 segundos
-duracao_do_level = 3000
+duracao_do_level = 20000
 
 
 
@@ -75,9 +79,13 @@ vida_entidades = {
     'Enemy1': 50,
     'Enemy2': 60,
     'Enemy3': 60,
+    'Enemy4': 60,
+    'Enemy5': 60,
     'Enemy1Shoot': 5,
     'Enemy2Shoot': 2,
     'Enemy3Shoot': 2,
+    'Enemy4Shoot': 2,
+    'Enemy5Shoot': 2,
 }
 
 #delay quando aperta na tecla de atirar
@@ -87,6 +95,8 @@ tiro_delay = {
     'Enemy1': 100,
     'Enemy2': 150,
     'Enemy3': 150,
+    'Enemy4': 150,
+    'Enemy5': 150,
 }
 
 entidade_dano = {
@@ -107,9 +117,13 @@ entidade_dano = {
     'Enemy1': 1,
     'Enemy2': 1,
     'Enemy3': 1,
+    'Enemy4': 1,
+    'Enemy5': 1,
     'Enemy1Shoot': 20,
     'Enemy2Shoot': 15,
     'Enemy3Shoot': 15,
+    'Enemy4Shoot': 15,
+    'Enemy5Shoot': 15,
 }
 
 #os pontos que os jogadores recebem de acordo com cada inimigo morto
@@ -131,9 +145,13 @@ score_entidades = {
     'Enemy1': 100,
     'Enemy2': 125,
     'Enemy3': 125,
+    'Enemy4': 100,
+    'Enemy5': 100,
     'Enemy1Shoot': 0,
     'Enemy2Shoot': 0,
     'Enemy3Shoot': 0,
+    'Enemy4Shoot': 0,
+    'Enemy5Shoot': 0,
 }
 
 estilo_texto = {

@@ -67,8 +67,12 @@ class Score:
                     if event.key == pygame.K_RETURN and len(name) <= 10:
                         #inserir no banco de dados
                         db_proxy.save({'self': self, 'name' : name, 'score': score, 'date': get_formatted_date()})
+
                         #troca a tela
                         self.show_score()
+
+                        #volta para o menu
+                        return 
                     #apagar oq foi escrito
                     elif event.key == pygame.K_BACKSPACE:
                         #apaga o ultimo caracter
@@ -92,32 +96,37 @@ class Score:
         #toca a musica em loop infinito
         pygame.mixer_music.play(-1)
 
-        #imagem
-        self.window.blit(source= self.imagem, dest=self.background)
-
-        self.score_text(48, "TOP 10 SCORE", branco, estilo_texto['Title'] )
-
-        self.score_text(20, 'NAME           SCORE           DATE', branco, estilo_texto['Name']) 
-
         #retorna a lista dos top 10 usuarios
-        db_proxy = DBProxy('DBScore')
-        lista_score = DBProxy.score_top10()
+        db_proxy = DBProxy('DBScore.db')
+        lista_score = db_proxy.score_top10()
         db_proxy.close()
 
-        for player_score in lista_score:
-            id, name, score, date = player_score
-            self.score_text(20, f'{name}          {score :05d}      {date}', branco, estilo_texto[lista_score.index(player_score)])
-
         while True:
+            print(lista_score)
+            #imagem
+            self.window.blit(source= self.imagem, dest=self.background)
+
+            self.score_text(48, "TOP 10 SCORE", branco, estilo_texto['Title'] )
+
+            self.score_text(20, 'NAME           SCORE           DATE', branco, estilo_texto['EnterName']) 
+
+            contador = 0
+
+            for player_score in lista_score:
+                id_, name, score, date = player_score
+                self.score_text(20, f'{name}          {score :05d}      {date}', branco, estilo_texto[contador])
+                contador += 1
+
+
             #btn de fechar janela
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    return
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        return
             pygame.display.flip()
             
 

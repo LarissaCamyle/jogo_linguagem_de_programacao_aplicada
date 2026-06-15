@@ -4,6 +4,7 @@ from backend.entity import Entity
 from backend.Const import window_width
 from backend.EnemyShoot import EnemyShoot
 from backend.player import Player
+from backend.GameOver import GameOver
 
 class EntityMediator:
 
@@ -114,7 +115,7 @@ class EntityMediator:
 
     @staticmethod
     #remove a entidade
-    def verify_health(entity_list: list[Entity]):
+    def verify_health(window, entity_list: list[Entity]):
         #verifica todas as entidades
         for ent in entity_list:
             #se a vida for igual ou menor que 0 remove a entidade da lista
@@ -123,6 +124,11 @@ class EntityMediator:
                 if isinstance(ent, Enemy):
                     EntityMediator.__give_score(ent, entity_list)
                 #remove a entidade do jogo
+
+                if isinstance(ent, Player):
+                    #Inicializa o menu
+                    GameOver = GameOver(self, window)
+                    retorno = GameOver.run(self)
                 entity_list.remove(ent)
 
 

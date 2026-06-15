@@ -95,7 +95,7 @@ class Level:
                 #evento criado, que gera um inimigo a cada 2 segundos
                 if event.type == evento_inimigo:  
                     #escolhe aleatório entre inimigo 1 ou inimigo 2  
-                    choice = random.choice(('Enemy1', 'Enemy2', 'Enemy3'))
+                    choice = random.choice(('Enemy1', 'Enemy2', 'Enemy3', 'Enemy4', 'Enemy5'))
 
 
                     #printa o inimigo gerado na tela
@@ -142,7 +142,7 @@ class Level:
             #chama o evento para verificar as colisoes com a lista das entidades
             EntityMediator.verify_collision(entity_list=self.entity_list)
             #chama o evento para verificar a vida das entidades
-            EntityMediator.verify_health(entity_list=self.entity_list)
+            EntityMediator.verify_health(self.window, entity_list=self.entity_list)
         pass
 
     #cada texto é como uma imagem no pygame

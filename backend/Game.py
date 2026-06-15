@@ -20,7 +20,7 @@ class Game:
             menu_return = menu.run()
 
             #opcao iniciar jogo
-            if menu_return in [lista_opcoes_menu[0], lista_opcoes_menu[1], lista_opcoes_menu[2]]:
+            if menu_return in [lista_opcoes_menu[0], lista_opcoes_menu[1]]:
                 #[Player1, Player2]
                 player_score = [0, 0]
 
