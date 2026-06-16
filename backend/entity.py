@@ -9,7 +9,8 @@ class Entity(ABC):
         self.name = name
         # CORREÇÃO: Construindo o caminho dinamicamente sem a barra inicial absoluta
         # Isso vai buscar a partir de onde o main.py foi executado
-        caminho_imagem = os.path.join('backend', 'img', f'{name}.png')
+        base_dir = os.path.dirname(__file__)
+        caminho_imagem = os.path.join(base_dir, 'img', f'{name}.png')
         
         self.surf = pygame.image.load(caminho_imagem)
         #imagem

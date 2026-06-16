@@ -73,7 +73,7 @@ class EntityFactory:
                 #                       vem fora da tela   
                 #                                           nasce aleatoriamente no eixo y
                 #                      não nascerem muito alto ou muito baixo
-                return Enemy('Enemy4', (window_width + 10, random.randint(40, window_height - 40)))
+                return Enemy('Enemy5', (window_width + 10, random.randint(40, window_height - 40)))
 
 
 

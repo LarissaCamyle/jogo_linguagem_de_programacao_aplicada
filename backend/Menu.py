@@ -1,3 +1,4 @@
+import os
 from tkinter.font import Font
 from backend.Const import window_height, window_width, branco, lista_opcoes_menu, roxo
 
@@ -7,16 +8,26 @@ class Menu:
     def __init__(self, window):
         self.window = window
         #carrega imagem de fundo
-        self.imagem = pygame.image.load('./backend/img/Menu_background.png').convert_alpha()
+        BASE_DIR = os.path.dirname(__file__)
+        caminho_imagem = os.path.join(BASE_DIR, 'img', 'Menu_background.png')
+
+        self.imagem = pygame.image.load(caminho_imagem)
+
         #desenha o retangulo para colocar o background
         self.background= self.imagem.get_rect(left=0, top=0)
 
     def run (self):
+        #limpa eventos antigos para não travar
+        pygame.event.clear()  
+
         #VARIAVEIS =====================================================================================================
         #conta o for para o texto do menu selecionado
         contador_opcoes_menu = 0
         #carrega a musica
-        pygame.mixer_music.load('./backend/musicas/menu.mp3')
+        BASE_DIR = os.path.dirname(__file__)
+        caminho_musica = os.path.join(BASE_DIR, 'musicas', 'menu.mp3')
+
+        pygame.mixer_music.load(caminho_musica)
         pygame.mixer.music.set_volume(0.3)
         #toca a musica em loop infinito
         pygame.mixer_music.play(-1)
@@ -100,10 +111,10 @@ class Menu:
 
     #cada texto é como uma imagem no pygame
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        text_font = pygame.font.Font(
-            "backend/fonts/Press_Start_2P/PressStart2P-Regular.ttf",
-            text_size
-        )
+        BASE_DIR = os.path.dirname(__file__)
+        font_path = os.path.join(BASE_DIR, 'fonts', 'Press_Start_2P', 'PressStart2P-Regular.ttf')
+
+        text_font = pygame.font.Font(font_path, text_size)
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: pygame.Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)

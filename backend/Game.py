@@ -3,6 +3,7 @@ from backend.Menu import Menu
 from backend.Score import Score
 from backend.Const import window_width, window_height, lista_opcoes_menu
 from backend.level import Level
+from backend.GameOver import GameOver
 
 class Game:
     def __init__(self):
@@ -14,6 +15,8 @@ class Game:
         while True:  
             score = Score(self.window)
 
+            #limpa eventos antigos para não travar
+            pygame.event.clear()  
 
             #Inicializa o menu
             menu = Menu(self.window)
@@ -29,11 +32,17 @@ class Game:
 
                 #se vencer o level 1 vai para o level 2
                 if level_return == True:
-                    level = Level(self.window, 'Level2', menu_return, player_score)
-                    level_return = level.run(player_score)
+                    level2 = Level(self.window, 'Level2', menu_return, player_score)
+                    level2_return = level2.run(player_score)
 
                     score.save_score(menu_return, player_score)
 
+                    if level2_return == False:
+                        game_over = GameOver(self.window)
+                        game_over.run()
+                else:
+                    game_over = GameOver(self.window)
+                    game_over.run()
 
             #opção de mostrar o score
             if menu_return == lista_opcoes_menu[2]:
@@ -43,6 +52,7 @@ class Game:
             if menu_return == lista_opcoes_menu[3]:
                 pygame.quit()
                 quit()
+                return
 
 
 

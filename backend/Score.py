@@ -1,28 +1,34 @@
 import datetime
+import os
 import sys
 from datetime import datetime
 import pygame
-from backend.Const import branco, estilo_texto, lista_opcoes_menu
+from backend.Const import branco, estilo_texto, lista_opcoes_menu, estilo_texto_tabela, window_width
 from backend.DBProxy import DBProxy
 
 class Score:
     def __init__(self, window):
         self.window = window
         #carrega imagem de fundo
-        self.imagem = pygame.image.load('./backend/img/Score.png').convert_alpha()
+        BASE_DIR = os.path.dirname(__file__)
+        caminho_imagem = os.path.join(BASE_DIR, 'img', 'Score.png')
+
+        self.imagem = pygame.image.load(caminho_imagem)
         #desenha o retangulo para colocar o background
         self.background= self.imagem.get_rect(left=0, top=0)
 
     def save_score(self, game_mode, player_score: list[int]):
         #carrega a musica
-        pygame.mixer_music.load('./backend/musicas/Score.mp3')
+        BASE_DIR = os.path.dirname(__file__)
+        caminho_musica = os.path.join(BASE_DIR, 'musicas', 'Score.mp3')
+        pygame.mixer_music.load(caminho_musica)
         pygame.mixer.music.set_volume(0.3)
         #toca a musica em loop infinito
         pygame.mixer_music.play(-1)
 
         #INICIALIZA O BANCO DE DADOS =======================================================================
         #                  nome do banco de dados
-        db_proxy = DBProxy('DBScore')
+        db_proxy = DBProxy('DBScore.db')
 
         #nome do jogador
         name = ''
@@ -49,7 +55,7 @@ class Score:
                     texto_nome = f"Player 1 enter your name (10 characters)"
                 else:
                     score = player_score[1]
-                    texto_score= f"PONTOS : {player_score[0]}"
+                    texto_score= f"PONTOS : {player_score[1]}"
                     texto_nome = f"Player 2 enter your name (10 characters)"
 
             self.score_text(25, texto_score, branco, estilo_texto['EnterName'] )
@@ -61,6 +67,8 @@ class Score:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                    return
+                
 
                 elif event.type ==  pygame.KEYDOWN:
                     #se clicou em enter verifica se oq foi escrito antes tem 10 ou menos caracteres
@@ -78,6 +86,10 @@ class Score:
                         #apaga o ultimo caracter
                         name = name[:-1]
                     #se foi escrito uma letra ele vai armazenando na variavel nome
+                    #ENTER 
+                    elif event.key == pygame.K_RETURN:
+                        #se apertar o enter inicializa o menu
+                        self.show_score()
                     else:
                         if len(name) < 10:
                             name += event.unicode
@@ -91,7 +103,9 @@ class Score:
 
     def show_score(self):
         #carrega a musica
-        pygame.mixer_music.load('./backend/musicas/Score.mp3')
+        BASE_DIR = os.path.dirname(__file__)
+        caminho_musica = os.path.join(BASE_DIR, 'musicas', 'Score.mp3')
+        pygame.mixer_music.load(caminho_musica)
         pygame.mixer.music.set_volume(0.3)
         #toca a musica em loop infinito
         pygame.mixer_music.play(-1)
@@ -102,20 +116,34 @@ class Score:
         db_proxy.close()
 
         while True:
-            print(lista_score)
             #imagem
             self.window.blit(source= self.imagem, dest=self.background)
+            #titulo
+            self.score_table(48, "TOP 10 SCORE", branco, estilo_texto_tabela['Title'] )
+            #cabecalho com palavras alinhadas
+            cabecalho = f"NAME       SCORE        DATE"
+            self.score_table(20, cabecalho, branco, estilo_texto_tabela['Table'])
 
-            self.score_text(48, "TOP 10 SCORE", branco, estilo_texto['Title'] )
-
-            self.score_text(20, 'NAME           SCORE           DATE', branco, estilo_texto['EnterName']) 
+            linha = f"_________________________________"
+            self.score_table(20, linha, branco, estilo_texto_tabela['Line'])
+            
+            self.score_text(20, "ESC to Continue", branco, ((window_width / 2), 420))
 
             contador = 0
 
             for player_score in lista_score:
                 id_, name, score, date = player_score
-                self.score_text(20, f'{name}          {score :05d}      {date}', branco, estilo_texto[contador])
+                #linha alinhada em formato de tabela
+                linha = f"{name[:10]:<10} {score:05d} {date}"
+
+                self.score_table(
+                    20,
+                    linha,
+                    branco,
+                    estilo_texto_tabela[contador]
+                )
                 contador += 1
+
 
 
             #btn de fechar janela
@@ -123,23 +151,35 @@ class Score:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                    return
 
+                #esc
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         return
+                    
+                
             pygame.display.flip()
             
 
 
+    def score_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
+        BASE_DIR = os.path.dirname(__file__)
+        font_path = os.path.join(BASE_DIR, 'fonts', 'Press_Start_2P', 'PressStart2P-Regular.ttf')
+
+        text_font = pygame.font.Font(font_path, text_size)
+        text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
+        text_rect = text_surf.get_rect(center=text_center_pos)
+        self.window.blit(source=text_surf, dest=text_rect)
 
     #cada texto é como uma imagem no pygame
-    def score_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        text_font = pygame.font.Font(
-            "backend/fonts/Press_Start_2P/PressStart2P-Regular.ttf",
-            text_size
-        )
+    def score_table(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
+        BASE_DIR = os.path.dirname(__file__)
+        font_path = os.path.join(BASE_DIR, 'fonts', 'Press_Start_2P', 'PressStart2P-Regular.ttf')
+
+        text_font = pygame.font.Font(font_path, text_size)
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
-        text_rect: pygame.Rect = text_surf.get_rect(center=text_center_pos)
+        text_rect = text_surf.get_rect(topleft=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)
 
 #retorna a data

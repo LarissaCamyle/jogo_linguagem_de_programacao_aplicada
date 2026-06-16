@@ -127,8 +127,7 @@ class EntityMediator:
 
                 if isinstance(ent, Player):
                     #Inicializa o menu
-                    GameOver = GameOver(self, window)
-                    retorno = GameOver.run(self)
+                    return False
                 entity_list.remove(ent)
 
 

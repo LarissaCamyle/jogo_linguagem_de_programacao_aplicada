@@ -1,3 +1,4 @@
+import os
 import random
 import sys
 from backend.Const import branco, window_height, lista_opcoes_menu, evento_inimigo, tempo_spawn, evento_vitoria, tempo_de_verificacao, duracao_do_level
@@ -50,7 +51,10 @@ class Level:
 
     def run(self, player_score : list[int]):
         #carregar musica
-        pygame.mixer_music.load(f'./backend/musicas/{self.name}.mp3')
+        BASE_DIR = os.path.dirname(__file__)
+        caminho_musica = os.path.join(BASE_DIR, 'musicas', f'{self.name}.mp3')
+
+        pygame.mixer_music.load(caminho_musica)
         pygame.mixer_music.play(-1)
 
         #FPS do jogo
@@ -91,6 +95,7 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                    return
 
                 #evento criado, que gera um inimigo a cada 2 segundos
                 if event.type == evento_inimigo:  
@@ -142,15 +147,18 @@ class Level:
             #chama o evento para verificar as colisoes com a lista das entidades
             EntityMediator.verify_collision(entity_list=self.entity_list)
             #chama o evento para verificar a vida das entidades
-            EntityMediator.verify_health(self.window, entity_list=self.entity_list)
+            resultado = EntityMediator.verify_health(self.window, entity_list=self.entity_list)
+
+            if resultado == False:
+                return False
         pass
 
     #cada texto é como uma imagem no pygame
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
-        text_font = pygame.font.Font(
-            "backend/fonts/Press_Start_2P/PressStart2P-Regular.ttf",
-            text_size
-        )
+        BASE_DIR = os.path.dirname(__file__)
+        font_path = os.path.join(BASE_DIR, 'fonts', 'Press_Start_2P', 'PressStart2P-Regular.ttf')
+
+        text_font = pygame.font.Font(font_path, text_size)
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: pygame.Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)
