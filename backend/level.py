@@ -7,7 +7,6 @@ from backend.entity import Entity
 from backend.entityFactory import EntityFactory
 from backend.entityMediator import EntityMediator
 import pygame
-
 from backend.player import Player
 
 class Level:
@@ -40,10 +39,10 @@ class Level:
         #tempo de duracao da fase
         self.timeout = duracao_do_level
 
-        #a cada 3 segundos gera o evento criado que faz aparecer um inimigo
+        #a cada x segundos gera o evento criado que faz aparecer um inimigo
         pygame.time.set_timer(evento_inimigo, tempo_spawn)
 
-        #a cada 100 mili segundos testa para ver se o jogador venceu a fase
+        #a cada x segundos testa para ver se o jogador venceu a fase
         pygame.time.set_timer(evento_vitoria, tempo_de_verificacao)
 
 
@@ -53,18 +52,15 @@ class Level:
         #carregar musica
         BASE_DIR = os.path.dirname(__file__)
         caminho_musica = os.path.join(BASE_DIR, 'musicas', f'{self.name}.mp3')
-
         pygame.mixer_music.load(caminho_musica)
         pygame.mixer_music.play(-1)
 
         #FPS do jogo
         clock = pygame.time.Clock()
         
-
         while True:
             #60 FPS
             clock.tick(60)
-
 
             #percorre pela lista de entidades e chama a funcao de mover
             for entity in self.entity_list:
@@ -88,7 +84,6 @@ class Level:
                     self.level_text(12, f'Player 2 - Health : {entity.health} | Score : {entity.score}', branco, (10, 55))
 
 
-
             #EVENTOS PYGAME
             for event in pygame.event.get():
                 #fecha janela
@@ -99,11 +94,10 @@ class Level:
 
                 #evento criado, que gera um inimigo a cada 2 segundos
                 if event.type == evento_inimigo:  
-                    #escolhe aleatório entre inimigo 1 ou inimigo 2  
+                    #escolhe aleatório entre inimigo 1 , 2, 3, 4 ou 5  
                     choice = random.choice(('Enemy1', 'Enemy2', 'Enemy3', 'Enemy4', 'Enemy5'))
 
-
-                    #printa o inimigo gerado na tela
+                    #printa o inimigo escolhido na tela
                     self.entity_list.append(EntityFactory.get_entity(choice))
 
                 #vai diminuindo o tempo da variavel timeout responsavel pela duracao do jogo
@@ -127,9 +121,8 @@ class Level:
                     if isinstance(ent, Player):
                         player_encontrado = True
 
-                
+                #se o jogador não existe mais no level encerra o level
                 if player_encontrado == False:
-                    #se nao existir nenhum jogador encerra o level retornando false
                     return False
 
 
@@ -137,8 +130,6 @@ class Level:
             self.level_text(12, f'{self.name} = Timeout: {self.timeout / 1000 : .1f}s', branco, (10,5))
             #printa o FPS
             self.level_text(12, f'FPS: {clock.get_fps() :.0f}', branco,(10, window_height - 35))
-            #quantos personagens tem na tela
-            self.level_text(12, f'Entidades: {len(self.entity_list)}', branco, (10, window_height - 20))
 
             #printa tudo na tela
             pygame.display.flip()
@@ -151,9 +142,8 @@ class Level:
 
             if resultado == False:
                 return False
-        pass
+            
 
-    #cada texto é como uma imagem no pygame
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         BASE_DIR = os.path.dirname(__file__)
         font_path = os.path.join(BASE_DIR, 'fonts', 'Press_Start_2P', 'PressStart2P-Regular.ttf')

@@ -1,6 +1,5 @@
 import sqlite3
 
-
 class DBProxy:
     def __init__(self, db_name: str):
         self.db_name = db_name
@@ -16,15 +15,12 @@ class DBProxy:
                                     date TEXT NOT NULL)
                                 ''')
 
-
-
     #SALVAR NO BANCO DE DADOS
     def save(self, score_dict: dict):
         #insere os dados no banco
         self.connection.execute('INSERT INTO dados (name, score, date) VALUES (:name, :score, :date)', score_dict)
         #executa o comando no BD
         self.connection.commit()
-
 
     #TOP 10 score
     #                       retorna uma lista 

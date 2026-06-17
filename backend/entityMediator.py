@@ -32,7 +32,6 @@ class EntityMediator:
                 ent.health = 0
         pass
 
-
     @staticmethod
     #da pontos para os jogadores que mataram o inimigo
     def __give_score(enemy: Enemy, entity_list: list[Entity]):
@@ -89,9 +88,6 @@ class EntityMediator:
                 entity1.last_damage = entity2.name
                 entity2.last_damage = entity1.name
 
-
-
-
     @staticmethod
     #verifica as colisoes 
     #                   lista de entidades
@@ -109,12 +105,8 @@ class EntityMediator:
                 entity2 = entity_list[j]
                 EntityMediator.__verify_collision_entity(entity1, entity2)
 
-
-            
-
-
     @staticmethod
-    #remove a entidade
+    #remove a entidade se ela estiver sem vida
     def verify_health(window, entity_list: list[Entity]):
         #verifica todas as entidades
         for ent in entity_list:
@@ -129,15 +121,5 @@ class EntityMediator:
                     #Inicializa o menu
                     return False
                 entity_list.remove(ent)
-
-
-
-
-
-
-
-
-
-
 
 

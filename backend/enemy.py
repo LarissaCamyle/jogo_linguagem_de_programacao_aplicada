@@ -1,9 +1,6 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from backend.Const import velocidade_entidades, window_width, tiro_delay
 from backend.entity import Entity
 from backend.EnemyShoot import EnemyShoot
-
 
 class Enemy(Entity):
     def __init__(self, name: str, position: tuple):

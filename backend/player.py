@@ -1,12 +1,8 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 from abc import abstractmethod
 import pygame
 from backend.PlayerShoot import PlayerShoot
 from backend.entity import Entity
 from backend.Const import velocidade_entidades, window_height, window_width, tiro_delay
-
 
 class Player(Entity):
     def __init__(self, name: str, position: tuple):
@@ -47,7 +43,7 @@ class Player(Entity):
 
         #PLAYER 2 MOVIMENTACAO -----------------------------------------------------
         else:
-            #SETA PARA CIMA
+            #TECLA W
             #se pressionar a seta p cima o player vai para cima no eixo y
             #vai para cima enquanto não ultrapassar o background e sumir
             if pressed_key[pygame.K_w] and self.rect.top > 0:
@@ -55,18 +51,18 @@ class Player(Entity):
                 #diminui a posição no eixo y (altura) 
                 self.rect.centery -= velocidade_entidades[self.name]
 
-            #SETA PARA BAIXO
+            #TECLA S
             #tecla para baixo player vai para baixo sem ultrapassar o background
             if pressed_key[pygame.K_s] and self.rect.bottom < window_height:
                 #aumenta a posição no eixo y (altura)
                 self.rect.centery += velocidade_entidades[self.name]
 
-            #SETA PARA ESQUERDA
+            #TECLA A (ESQUERDA)
             if pressed_key[pygame.K_a] and self.rect.left > 0:
                 #diminuindo a posição no eixo x (largura)
                 self.rect.centerx -= velocidade_entidades[self.name]
 
-            #SETA PARA DIREITA
+            #TECLA D (ESQUERDA)
             if pressed_key[pygame.K_d] and self.rect.right < window_width:
                 #diminuindo a posição no eixo x (largura)
                 self.rect.centerx += velocidade_entidades[self.name]

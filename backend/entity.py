@@ -7,8 +7,7 @@ import pygame
 class Entity(ABC):
     def __init__(self, name: str, position: tuple):
         self.name = name
-        # CORREÇÃO: Construindo o caminho dinamicamente sem a barra inicial absoluta
-        # Isso vai buscar a partir de onde o main.py foi executado
+        # Construindo o caminho dinamicamente 
         base_dir = os.path.dirname(__file__)
         caminho_imagem = os.path.join(base_dir, 'img', f'{name}.png')
         

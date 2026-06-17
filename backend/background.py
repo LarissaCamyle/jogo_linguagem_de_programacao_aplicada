@@ -1,9 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 from backend.entity import Entity
 from backend.Const import window_width, velocidade_entidades
-
 
 class Background(Entity):
     def __init__(self, name: str, position: tuple):

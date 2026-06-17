@@ -1,23 +1,29 @@
 import pygame
-
 #CORES  ========================================
 branco = (255,255,255)
 roxo = (144, 110, 255)
 
-
-
-#tamanho da tela ===============================
+#TAMANHO DA TELA ===============================
 window_width = 800
 window_height = 450
 
-
+#OPCOES MENU ==================================
 lista_opcoes_menu= ('NEW GAME 1 PLAYER',
             'NEW GAME 2 PLAYERS',
             'SCORE',
             'EXIT')
 
+#TEMPO ========================================
+#duracao do level em 20 segundos
+duracao_do_level = 40000
 
+#tempo q nasce os inimigos
+tempo_spawn = 2000
 
+#tempo de verificacao para saber quando o jogador venceu a fase
+tempo_de_verificacao = 100
+
+#VELOCIDADE ===================================
 velocidade_entidades = {
     'background1img0': 3,
     'background1img1': 0,
@@ -45,22 +51,24 @@ velocidade_entidades = {
     'Enemy5Shoot': 3,
 }
 
+#delay/velocidade quando aperta na tecla de atirar
+tiro_delay = {
+    'Player1': 20,
+    'Player2': 15,
+    'Enemy1': 100,
+    'Enemy2': 150,
+    'Enemy3': 150,
+    'Enemy4': 150,
+    'Enemy5': 150,
+}
+
+#EVENTOS ======================================
 #user event é o evento (evento de teclado por exemplo: KEYDOWN) criado pelo usuario 
 evento_inimigo = pygame.USEREVENT + 1
 
 evento_vitoria= pygame.USEREVENT + 2
 
-#tempo q nasce os inimigos
-tempo_spawn = 2000
-
-#tempo de verificacao para saber quando o jogador venceu a fase
-tempo_de_verificacao = 100
-
-#duracao do level em 20 segundos
-duracao_do_level = 40000
-
-
-
+#VIDA, SCORE E DANO ==========================
 vida_entidades = {
     'background1img0': 999,
     'background1img1': 999,
@@ -86,17 +94,6 @@ vida_entidades = {
     'Enemy3Shoot': 2,
     'Enemy4Shoot': 2,
     'Enemy5Shoot': 2,
-}
-
-#delay quando aperta na tecla de atirar
-tiro_delay = {
-    'Player1': 20,
-    'Player2': 15,
-    'Enemy1': 100,
-    'Enemy2': 150,
-    'Enemy3': 150,
-    'Enemy4': 150,
-    'Enemy5': 150,
 }
 
 entidade_dano = {
@@ -154,6 +151,7 @@ score_entidades = {
     'Enemy5Shoot': 0,
 }
 
+#FORMATACAO DE TEXTO ====================
 estilo_texto = {
     'Title': (window_width / 2, 80),
     'EnterName': (window_width / 2, 150),
