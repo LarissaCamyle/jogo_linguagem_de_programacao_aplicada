@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from backend.Const import vida_entidades, entidade_dano, score_entidades
 import os
+from backend.CaminhoImagem import resource_path
 import pygame
 
 #classe abstrata
@@ -8,10 +9,9 @@ class Entity(ABC):
     def __init__(self, name: str, position: tuple):
         self.name = name
         # Construindo o caminho dinamicamente 
-        base_dir = os.path.dirname(__file__)
-        caminho_imagem = os.path.join(base_dir, 'assets', f'{name}.png')
-        
+        caminho_imagem = resource_path(f'assets/{name}.png')
         self.surf = pygame.image.load(caminho_imagem)
+        
         #imagem
         self.rect = self.surf.get_rect(left= position[0], top= position[1])
         self.speed = 0

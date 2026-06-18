@@ -8,6 +8,7 @@ from backend.entityFactory import EntityFactory
 from backend.entityMediator import EntityMediator
 import pygame
 from backend.player import Player
+from backend.CaminhoImagem import resource_path
 
 class Level:
     def __init__(self, window, name, game_mode, player_score : list[int]):
@@ -50,8 +51,7 @@ class Level:
 
     def run(self, player_score : list[int]):
         #carregar musica
-        BASE_DIR = os.path.dirname(__file__)
-        caminho_musica = os.path.join(BASE_DIR, 'assets', f'{self.name}.mp3')
+        caminho_musica = resource_path(f'assets\{self.name}.mp3')
         pygame.mixer_music.load(caminho_musica)
         pygame.mixer_music.play(-1)
 
@@ -145,8 +145,7 @@ class Level:
             
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
-        BASE_DIR = os.path.dirname(__file__)
-        font_path = os.path.join(BASE_DIR, 'assets', 'PressStart2P-Regular.ttf')
+        font_path = resource_path('assets/PressStart2P-Regular.ttf')
 
         text_font = pygame.font.Font(font_path, text_size)
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()

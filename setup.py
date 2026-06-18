@@ -1,17 +1,12 @@
 from cx_Freeze import setup, Executable
 import os
 
-path = "./backend/assets"
-asset_list = os.listdir(path)
-asset_list_completa = [
-    os.path.join(path, asset).replace("\\", "/")
-    for asset in asset_list
-]
-print(asset_list_completa)
+ASSETS_DIR = os.path.abspath("./backend/assets")
 
 executables = [Executable("main.py")]
+
 files = {
-    "include_files": asset_list_completa,
+    "include_files": [(ASSETS_DIR, "assets")],
     "packages": ["pygame"]
 }
 
@@ -22,9 +17,3 @@ setup(
     options={"build_exe": files},
     executables=executables
 )
-
-
-
-
-
-

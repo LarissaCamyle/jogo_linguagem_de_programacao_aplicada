@@ -2,6 +2,7 @@ import os
 from tkinter.font import Font
 from backend.Const import window_height, window_width, branco, lista_opcoes_menu, roxo
 from backend.Menu import Menu
+from backend.CaminhoImagem import resource_path
 
 import pygame
 
@@ -9,8 +10,7 @@ class GameOver:
     def __init__(self, window):
         self.window = window
         #carrega imagem de fundo
-        BASE_DIR = os.path.dirname(__file__)
-        caminho_imagem = os.path.join(BASE_DIR, 'assets', 'GameOver.png')
+        caminho_imagem = resource_path('assets/GameOver.png')
         self.imagem = pygame.image.load(caminho_imagem)
         
         #desenha o retangulo para colocar o background
@@ -19,8 +19,7 @@ class GameOver:
     def run (self):
         #VARIAVEIS =====================================================================================================
         #carrega a musica
-        BASE_DIR = os.path.dirname(__file__)
-        caminho_musica = os.path.join(BASE_DIR, 'assets', 'GameOver.mp3')
+        caminho_musica = resource_path('assets/GameOver.mp3')
         pygame.mixer_music.load(caminho_musica)
         pygame.mixer.music.set_volume(0.3)
         #toca a musica em loop infinito
@@ -61,8 +60,7 @@ class GameOver:
 
     #cada texto é como uma imagem no pygame
     def gameover_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        BASE_DIR = os.path.dirname(__file__)
-        font_path = os.path.join(BASE_DIR, 'assets', 'PressStart2P-Regular.ttf')
+        font_path = resource_path('assets/PressStart2P-Regular.ttf')
 
         text_font = pygame.font.Font(font_path, text_size)
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
