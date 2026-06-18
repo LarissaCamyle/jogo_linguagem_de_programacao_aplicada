@@ -11,7 +11,7 @@ class Score:
         self.window = window
         #carrega imagem de fundo
         BASE_DIR = os.path.dirname(__file__)
-        caminho_imagem = os.path.join(BASE_DIR, 'img', 'Score.png')
+        caminho_imagem = os.path.join(BASE_DIR, 'assets', 'Score.png')
 
         self.imagem = pygame.image.load(caminho_imagem)
         #desenha o retangulo para colocar o background
@@ -20,7 +20,7 @@ class Score:
     def save_score(self, game_mode, player_score: list[int]):
         #carrega a musica
         BASE_DIR = os.path.dirname(__file__)
-        caminho_musica = os.path.join(BASE_DIR, 'musicas', 'Score.mp3')
+        caminho_musica = os.path.join(BASE_DIR, 'assets', 'Score.mp3')
         pygame.mixer_music.load(caminho_musica)
         pygame.mixer.music.set_volume(0.3)
         #toca a musica em loop infinito
@@ -104,7 +104,7 @@ class Score:
     def show_score(self):
         #carrega a musica
         BASE_DIR = os.path.dirname(__file__)
-        caminho_musica = os.path.join(BASE_DIR, 'musicas', 'Score.mp3')
+        caminho_musica = os.path.join(BASE_DIR, 'assets', 'Score.mp3')
         pygame.mixer_music.load(caminho_musica)
         pygame.mixer.music.set_volume(0.3)
         #toca a musica em loop infinito
@@ -165,7 +165,7 @@ class Score:
 
     def score_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         BASE_DIR = os.path.dirname(__file__)
-        font_path = os.path.join(BASE_DIR, 'fonts', 'Press_Start_2P', 'PressStart2P-Regular.ttf')
+        font_path = os.path.join(BASE_DIR, 'assets', 'PressStart2P-Regular.ttf')
 
         text_font = pygame.font.Font(font_path, text_size)
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()
@@ -175,7 +175,7 @@ class Score:
     #cada texto é como uma imagem no pygame
     def score_table(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         BASE_DIR = os.path.dirname(__file__)
-        font_path = os.path.join(BASE_DIR, 'fonts', 'Press_Start_2P', 'PressStart2P-Regular.ttf')
+        font_path = os.path.join(BASE_DIR, 'assets', 'PressStart2P-Regular.ttf')
 
         text_font = pygame.font.Font(font_path, text_size)
         text_surf: pygame.Surface = text_font.render(text, True, text_color).convert_alpha()

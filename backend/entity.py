@@ -9,7 +9,7 @@ class Entity(ABC):
         self.name = name
         # Construindo o caminho dinamicamente 
         base_dir = os.path.dirname(__file__)
-        caminho_imagem = os.path.join(base_dir, 'img', f'{name}.png')
+        caminho_imagem = os.path.join(base_dir, 'assets', f'{name}.png')
         
         self.surf = pygame.image.load(caminho_imagem)
         #imagem

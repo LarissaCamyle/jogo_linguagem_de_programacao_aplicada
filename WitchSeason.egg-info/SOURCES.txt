@@ -1,0 +1,5 @@
+setup.py
+WitchSeason.egg-info/PKG-INFO
+WitchSeason.egg-info/SOURCES.txt
+WitchSeason.egg-info/dependency_links.txt
+WitchSeason.egg-info/top_level.txt
