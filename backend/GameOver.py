@@ -27,6 +27,7 @@ class GameOver:
 
         #INCIALIZACAO DO JOGO ===========================================================================================
         while True:
+            pygame.event.clear()  # limpa eventos antigos
             #IMAGENS E TEXTOS DA TELA ***********************************************************************************
 
             #adiciona a imagem no background
@@ -53,10 +54,8 @@ class GameOver:
 
                 #quando aperta tecla
                 if event.type == pygame.KEYDOWN:
-                    #ESC para fechar a tela
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_ESCAPE:
-                            return
+                    if event.key == pygame.K_ESCAPE:
+                        return
 
     #cada texto é como uma imagem no pygame
     def gameover_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
